@@ -35,5 +35,13 @@ function closeModal() {
 }
 
 // Fermeture de la modal en cliquant sur le background
-modalbg.addEventListener("click", closeModal);
+// modalbg.addEventListener("click", closeModal);
 
+// Variables des champs pour afficher les messages 
+const firstValid = document.getElementById("firstValid");
+const lastValid = document.getElementById("lastValid");
+const emailValid = document.getElementById("emailValid");
+const birthdateValid = document.getElementById("birthdateValid");
+const quantityValid = document.getElementById("quantityValid");
+const locationValid = document.getElementById("locationValid");
+const conditionValid = document.getElementById("conditionValid");
