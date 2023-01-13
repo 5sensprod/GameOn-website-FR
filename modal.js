@@ -1,3 +1,5 @@
+
+//fonction pour afficher le menu responsive
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -20,4 +22,18 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+
+// Initialisation du bouton 'close' 
+const close = document.querySelector(".close");
+
+// jaout un event listener sur le bouton 'close'
+close.addEventListener("click", closeModal);
+
+// Fonction pour fermer la modal
+function closeModal() {
+  modalbg.style.display = "none";
+}
+
+// Fermeture de la modal en cliquant sur le background
+modalbg.addEventListener("click", closeModal);
 
