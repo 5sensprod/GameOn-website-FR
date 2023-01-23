@@ -1,5 +1,3 @@
-
-//fonction pour afficher le menu responsive
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -14,6 +12,9 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
+// variables close button
+const closeBtn = document.querySelector(".close");
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -23,25 +24,16 @@ function launchModal() {
 }
 
 
-// Initialisation du bouton 'close' 
-const close = document.querySelector(".close");
+// close modal event
+closeBtn.addEventListener("click", closeModal);
+modalbg.addEventListener("click", closeModal);
 
-// jaout un event listener sur le bouton 'close'
-close.addEventListener("click", closeModal);
-
-// Fonction pour fermer la modal
-function closeModal() {
-  modalbg.style.display = "none";
+// close modal function
+function closeModal(e) {
+  if (e.target === closeBtn || e.target === modalbg) {
+    modalbg.style.display = "none";
+  }
 }
 
-// Fermeture de la modal en cliquant sur le background
-// modalbg.addEventListener("click", closeModal);
+//validate input
 
-// Variables des champs pour afficher les messages 
-const firstValid = document.getElementById("firstValid");
-const lastValid = document.getElementById("lastValid");
-const emailValid = document.getElementById("emailValid");
-const birthdateValid = document.getElementById("birthdateValid");
-const quantityValid = document.getElementById("quantityValid");
-const locationValid = document.getElementById("locationValid");
-const conditionValid = document.getElementById("conditionValid");
