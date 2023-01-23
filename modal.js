@@ -109,6 +109,8 @@ if(!birthdate.value) {
     document.querySelector(".radio-error").innerHTML = "";
   }
 
+
+  // validate checkbox
   const termsCheckbox = document.getElementById("checkbox1");
   if (!termsCheckbox.checked) {
     termsCheckbox.nextElementSibling.innerHTML = "Vous devez accepter les conditions d'utilisation";
@@ -116,6 +118,9 @@ if(!birthdate.value) {
   } else {
     termsCheckbox.nextElementSibling.innerHTML = "";
   }
+
+  //
+  document.getElementById("checkbox1").checked = true;
 
   // save form data if valid
   if (isValid) {
