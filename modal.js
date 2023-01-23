@@ -118,9 +118,9 @@ if(!birthdate.value) {
   } else {
     termsCheckbox.nextElementSibling.innerHTML = "";
   }
-
-  //
-  document.getElementById("checkbox1").checked = true;
+  
+//
+document.getElementById("checkbox1").checked = true;
 
   // save form data if valid
   if (isValid) {
