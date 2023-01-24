@@ -68,14 +68,28 @@ function validateForm(e) {
   }
 
 // validate email
-const email = document.getElementById("email");
-const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-if (!emailRegEx.test(email.value)) {
+function validateEmail(email) {
+  // standard email validation regex
+  const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  // additional validation rules
+  const additionalRules = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(?<!\.)$/;
+
+  if (!emailRegEx.test(email.value) || !additionalRules.test(email.value)) {
     email.nextElementSibling.innerHTML = "Invalid email";
-    isValid = false;
-} else {
+    return false;
+  } else {
     email.nextElementSibling.innerHTML = "";
+    return true;
+  }
 }
+const email = document.getElementById("email");
+
+
+if (!validateEmail(email)) {
+    isValid = false;
+}
+
 
 // validate birthdate
 
