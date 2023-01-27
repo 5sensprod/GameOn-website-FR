@@ -11,8 +11,25 @@ const radios = document.querySelectorAll("input[type=radio]");
 const checkbox = document.querySelector("#checkbox1");
 const submitBtn = document.querySelector("input[type=submit]");
 
+const errorMessage = document.querySelector(".checkbox-input");
+
 // Ecoute l'envoi du formulaire
-form.addEventListener("submit", validateForm);
+form.addEventListener("submit", function (event) {
+  validateForm(event);
+  validateRadios(event);
+});
+
+
+// valide si au moins un bouton radio coché
+function validateRadios(radios) {
+  let radioChecked = false;
+  radios.forEach((radio) => {
+    if (radio.checked) {
+      radioChecked = true;
+    }
+  });
+  return radioChecked;
+}
 
 function validateForm(e) {
   e.preventDefault();
@@ -37,31 +54,31 @@ function validateForm(e) {
   // fonction de validation de l'email
   function validateEmail(email) {
     // Définit les règles de validation pour l'email via une expression régulière.
-    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
 
     // Vérifie la validité de l'adresse e-mail saisie
     if (!emailRegEx.test(email.value)) {
-        email.nextElementSibling.innerHTML = "Veuillez saisir une adresse e-mail valide";
-        return false;
+      email.nextElementSibling.innerHTML = "Veuillez saisir une adresse e-mail valide";
+      return false;
     } else {
-        email.nextElementSibling.innerHTML = "";
-        return true;
+      email.nextElementSibling.innerHTML = "";
+      return true;
     }
-}
+  }
 
-// Valide l'email
-if (!validateEmail(email)) {
+  // Valide l'email
+  if (!validateEmail(email)) {
     isValid = false;
-}
+  }
 
- // Valide la date de naissance
+  // Valide la date de naissance
 
-if(!birthdate.value) {
-  birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
-  isValid = false;
-} else {
+  if (!birthdate.value) {
+    birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
+    isValid = false;
+  } else {
     birthdate.nextElementSibling.innerHTML = "";
-}
+  }
 
   // Valide le nombre de tournois
   if (isNaN(number.value)) {
@@ -72,20 +89,13 @@ if(!birthdate.value) {
   }
 
   // Valide les boutons radios
-  let radioChecked = false;
-  radios.forEach((radio) => {
-    if (radio.checked) {
-      radioChecked = true;
-    }
-  });
+  let radioChecked = validateRadios(radios);
   if (!radioChecked) {
     document.querySelector(".checkbox-input").innerHTML = "Veillez choisir une option";
     isValid = false;
   } else {
     document.querySelector(".checkbox-input").innerHTML = "";
   }
-
-
   // valide la case à cocher
   const termsCheckbox = document.getElementById("checkbox1");
   if (!termsCheckbox.checked) {
