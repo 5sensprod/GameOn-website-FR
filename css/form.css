@@ -158,3 +158,7 @@ input {
   left: 21%;
   top: 19%;
 }
+
+#error-message {
+  display: none;
+}

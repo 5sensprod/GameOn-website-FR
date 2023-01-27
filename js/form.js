@@ -1,3 +1,4 @@
+
 // Selectionne le formulaire
 const form = document.querySelector("form");
 
@@ -10,23 +11,13 @@ const number = document.querySelector("#number");
 const radios = document.querySelectorAll("input[type=radio]");
 const checkbox = document.querySelector("#checkbox1");
 const submitBtn = document.querySelector("input[type=submit]");
-
+const successMessage = document.querySelector(".success-message");
 const errorMessage = document.querySelector(".checkbox-input");
-
-let isValid = true;
 
 // Ecoute l'envoi du formulaire
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  isValid = true;
-  validateFirstName();
-  validateLastName();
-  validateEmail();
-  validateBirthdate();
-  validateTournaments();
-  validateRadios();
-  validateCheckbox();
-  if (isValid) {
+  if (validateName() && validateEmail() && validateBirthdate() && validateTournaments() && validateRadios() && validateCheckbox()) {
     hideModal();
     successMessage.innerHTML = "Formulaire soumis avec succès !";
   } else {
@@ -34,24 +25,14 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-// FONCTIONS DE VALIDATION
 
-
-function validateFirstName() {
+function validateName() {
   if (firstName.value.length < 2 || firstName.value === "") {
     firstName.nextElementSibling.innerHTML = "Minimum 2 characters";
-    isValid = false;
+    return false;
   } else {
     firstName.nextElementSibling.innerHTML = "";
-  }
-}
-
-function validateLastName() {
-  if (lastName.value.length < 2 || lastName.value === "") {
-    lastName.nextElementSibling.innerHTML = "Minimum 2 characters";
-    isValid = false;
-  } else {
-    lastName.nextElementSibling.innerHTML = "";
+    return true;
   }
 }
 
@@ -59,20 +40,23 @@ function validateEmail() {
   const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(?:.[a-zA-Z]{2,})?$/;
   if (!emailRegEx.test(email.value)) {
     email.nextElementSibling.innerHTML = "Veuillez saisir une adresse e-mail valide";
-    isValid = false;
+    return false;
   } else {
     email.nextElementSibling.innerHTML = "";
+    return true;
   }
 }
 
 function validateBirthdate() {
   if (!birthdate.value) {
     birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
-    isValid = false;
+    return false;
   } else {
     birthdate.nextElementSibling.innerHTML = "";
+    return true;
   }
 }
+
 function validateTournaments() {
   if (isNaN(number.value)) {
     number.nextElementSibling.innerHTML = "Veuillez saisir un nombre";
@@ -84,13 +68,16 @@ function validateTournaments() {
 }
 
 function validateRadios() {
-  let radioChecked = false;
+  let isValid = false;
   radios.forEach((radio) => {
     if (radio.checked) {
-      radioChecked = true;
+      isValid = true;
     }
   });
-  return radioChecked;
+  if (!isValid) {
+    errorMessage.innerHTML = "Veuillez sélectionner une option";
+  }
+  return isValid;
 }
 
 function validateCheckbox() {
