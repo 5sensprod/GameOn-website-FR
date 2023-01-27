@@ -35,12 +35,10 @@ function validateForm(e) {
   }
 
   function validateEmail(email) {
-    // standard email validation regex
+    // Valide l'email avec regex
     const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-
     const additionalRules = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(?<!\.)$/;
-
+    // Valide l'email
     if (!emailRegEx.test(email.value) || !additionalRules.test(email.value)) {
       email.nextElementSibling.innerHTML = "Invalid email";
       return false;
@@ -49,7 +47,7 @@ function validateForm(e) {
       return true;
     }
   }
-
+  // Valide l'email
   if (!validateEmail(email)) {
     isValid = false;
   }
