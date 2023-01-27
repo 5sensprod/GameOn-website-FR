@@ -55,7 +55,6 @@ function validateForm(e) {
 
  // Valide la date de naissance
 
-const birthdate = document.getElementById("birthdate");
 if(!birthdate.value) {
   birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
   isValid = false;
