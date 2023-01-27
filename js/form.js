@@ -14,24 +14,25 @@ const submitBtn = document.querySelector("input[type=submit]");
 const successMessage = document.querySelector(".success-message");
 const errorMessage = document.querySelector(".checkbox-input");
 
-// Ecoute l'envoi du formulaire
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  if (validateName() && validateEmail() && validateBirthdate() && validateTournaments() && validateRadios() && validateCheckbox()) {
-    hideModal();
-    successMessage.innerHTML = "Formulaire soumis avec succès !";
-  } else {
-    alert("Veuillez corriger les erreurs avant de soumettre le formulaire.");
-  }
-});
 
-
-function validateName() {
+// Fonctions de validation des champs du formulaire
+function validateFirstName() {
   if (firstName.value.length < 2 || firstName.value === "") {
-    firstName.nextElementSibling.innerHTML = "Minimum 2 characters";
+    firstName.nextElementSibling.innerHTML = "Minimum 2 caractères requis";
     return false;
   } else {
     firstName.nextElementSibling.innerHTML = "";
+    return true;
+  }
+}
+
+
+function validateLastName() {
+  if (lastName.value.length < 2 || lastName.value === "") {
+    lastName.nextElementSibling.innerHTML = "Minimum 2 caractères requis";
+    return false;
+  } else {
+    lastName.nextElementSibling.innerHTML = "";
     return true;
   }
 }
@@ -57,6 +58,7 @@ function validateBirthdate() {
   }
 }
 
+// Fonction qui valide le nombre de tournois
 function validateTournaments() {
   if (isNaN(number.value)) {
     number.nextElementSibling.innerHTML = "Veuillez saisir un nombre";
@@ -67,6 +69,7 @@ function validateTournaments() {
   }
 }
 
+// Fonction qui valide les radios
 function validateRadios() {
   let isValid = false;
   radios.forEach((radio) => {
@@ -75,7 +78,7 @@ function validateRadios() {
     }
   });
   if (!isValid) {
-    errorMessage.innerHTML = "Veuillez sélectionner une option";
+    errorMessage.nextElementSibling.innerHTML = "Veuillez sélectionner une option";
   }
   return isValid;
 }
@@ -91,8 +94,27 @@ function validateCheckbox() {
   }
 }
 
-function hideModal() {
-  setTimeout(function () {
-    modalbg.style.display = "none";
-  }, 2000);
+// Ecoute l'envoi du formulaire
+form.addEventListener("submit", validate);
+
+// Fonction qui affiche le toast
+function toast(message) {
+  var toast = document.getElementById("toast");
+  toast.innerHTML = message;
+  toast.classList.add("show");
+  setTimeout(function(){
+    toast.classList.remove("show");
+  }, 6000);
+}
+
+
+// Fonction qui valide le formulaire
+function validate() {
+  if (validateFirstName() && validateLastName() && validateEmail() && validateBirthdate() && validateTournaments() && validateRadios() && validateCheckbox()) {
+    toast("Merci ! Votre réservation a été reçue.");
+    return true;
+  } else {
+    alert("Veuillez corriger les erreurs avant de soumettre le formulaire.");
+    return false;
+  }
 }
