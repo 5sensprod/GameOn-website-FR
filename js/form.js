@@ -34,24 +34,25 @@ function validateForm(e) {
     lastName.nextElementSibling.innerHTML = "";
   }
 
+  // fonction de validation de l'email
   function validateEmail(email) {
-    // Définit les règles de validation pour l'email via des expressions régulières.
-    const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const additionalRules = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(?<!\.)$/;
+    // Définit les règles de validation pour l'email via une expression régulière.
+    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     // Vérifie la validité de l'adresse e-mail saisie
-    if (!emailRegEx.test(email.value) || !additionalRules.test(email.value)) {
-      email.nextElementSibling.innerHTML = "Invalid email";
-      return false;
+    if (!emailRegEx.test(email.value)) {
+        email.nextElementSibling.innerHTML = "Veuillez saisir une adresse e-mail valide";
+        return false;
     } else {
-      email.nextElementSibling.innerHTML = "";
-      return true;
+        email.nextElementSibling.innerHTML = "";
+        return true;
     }
-  }
-  // Valide l'email
-  if (!validateEmail(email)) {
+}
+
+// Valide l'email
+if (!validateEmail(email)) {
     isValid = false;
-  }
+}
 
  // Valide la date de naissance
 
@@ -64,7 +65,7 @@ if(!birthdate.value) {
 
   // Valide le nombre de tournois
   if (isNaN(number.value)) {
-    numberContest.nextElementSibling.innerHTML = "Please enter a number";
+    number.nextElementSibling.innerHTML = "Veuillez saisir un nombre";
     isValid = false;
   } else {
     number.nextElementSibling.innerHTML = "";
@@ -78,10 +79,10 @@ if(!birthdate.value) {
     }
   });
   if (!radioChecked) {
-    document.querySelector(".radio-error").innerHTML = "Please select an option";
+    document.querySelector(".checkbox-input").innerHTML = "Veillez choisir une option";
     isValid = false;
   } else {
-    document.querySelector(".radio-error").innerHTML = "";
+    document.querySelector(".checkbox-input").innerHTML = "";
   }
 
 
