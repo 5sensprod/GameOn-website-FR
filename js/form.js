@@ -13,15 +13,77 @@ const submitBtn = document.querySelector("input[type=submit]");
 
 const errorMessage = document.querySelector(".checkbox-input");
 
+let isValid = true;
+
 // Ecoute l'envoi du formulaire
 form.addEventListener("submit", function (event) {
-  validateForm(event);
-  validateRadios(event);
+  event.preventDefault();
+  isValid = true;
+  validateFirstName();
+  validateLastName();
+  validateEmail();
+  validateBirthdate();
+  validateTournaments();
+  validateRadios();
+  validateCheckbox();
+  if (isValid) {
+    hideModal();
+    successMessage.innerHTML = "Formulaire soumis avec succès !";
+  } else {
+    alert("Veuillez corriger les erreurs avant de soumettre le formulaire.");
+  }
 });
 
+// FONCTIONS DE VALIDATION
 
-// valide si au moins un bouton radio coché
-function validateRadios(radios) {
+
+function validateFirstName() {
+  if (firstName.value.length < 2 || firstName.value === "") {
+    firstName.nextElementSibling.innerHTML = "Minimum 2 characters";
+    isValid = false;
+  } else {
+    firstName.nextElementSibling.innerHTML = "";
+  }
+}
+
+function validateLastName() {
+  if (lastName.value.length < 2 || lastName.value === "") {
+    lastName.nextElementSibling.innerHTML = "Minimum 2 characters";
+    isValid = false;
+  } else {
+    lastName.nextElementSibling.innerHTML = "";
+  }
+}
+
+function validateEmail() {
+  const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(?:.[a-zA-Z]{2,})?$/;
+  if (!emailRegEx.test(email.value)) {
+    email.nextElementSibling.innerHTML = "Veuillez saisir une adresse e-mail valide";
+    isValid = false;
+  } else {
+    email.nextElementSibling.innerHTML = "";
+  }
+}
+
+function validateBirthdate() {
+  if (!birthdate.value) {
+    birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
+    isValid = false;
+  } else {
+    birthdate.nextElementSibling.innerHTML = "";
+  }
+}
+function validateTournaments() {
+  if (isNaN(number.value)) {
+    number.nextElementSibling.innerHTML = "Veuillez saisir un nombre";
+    return false;
+  } else {
+    number.nextElementSibling.innerHTML = "";
+    return true;
+  }
+}
+
+function validateRadios() {
   let radioChecked = false;
   radios.forEach((radio) => {
     if (radio.checked) {
@@ -31,87 +93,19 @@ function validateRadios(radios) {
   return radioChecked;
 }
 
-function validateForm(e) {
-  e.preventDefault();
-  let isValid = true;
-
-  // Valide le prénom
-  if (firstName.value.length < 2 || firstName.value === "") {
-    firstName.nextElementSibling.innerHTML = "Minimum 2 characters";
-    isValid = false;
-  } else {
-    firstName.nextElementSibling.innerHTML = "";
-  }
-
-  // Valide le nom
-  if (lastName.value.length < 2 || lastName.value === "") {
-    lastName.nextElementSibling.innerHTML = "Minimum 2 characters";
-    isValid = false;
-  } else {
-    lastName.nextElementSibling.innerHTML = "";
-  }
-
-  // fonction de validation de l'email
-  function validateEmail(email) {
-    // Définit les règles de validation pour l'email via une expression régulière.
-    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
-
-    // Vérifie la validité de l'adresse e-mail saisie
-    if (!emailRegEx.test(email.value)) {
-      email.nextElementSibling.innerHTML = "Veuillez saisir une adresse e-mail valide";
-      return false;
-    } else {
-      email.nextElementSibling.innerHTML = "";
-      return true;
-    }
-  }
-
-  // Valide l'email
-  if (!validateEmail(email)) {
-    isValid = false;
-  }
-
-  // Valide la date de naissance
-
-  if (!birthdate.value) {
-    birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
-    isValid = false;
-  } else {
-    birthdate.nextElementSibling.innerHTML = "";
-  }
-
-  // Valide le nombre de tournois
-  if (isNaN(number.value)) {
-    number.nextElementSibling.innerHTML = "Veuillez saisir un nombre";
-    isValid = false;
-  } else {
-    number.nextElementSibling.innerHTML = "";
-  }
-
-  // Valide les boutons radios
-  let radioChecked = validateRadios(radios);
-  if (!radioChecked) {
-    document.querySelector(".checkbox-input").innerHTML = "Veillez choisir une option";
-    isValid = false;
-  } else {
-    document.querySelector(".checkbox-input").innerHTML = "";
-  }
-  // valide la case à cocher
+function validateCheckbox() {
   const termsCheckbox = document.getElementById("checkbox1");
   if (!termsCheckbox.checked) {
     termsCheckbox.nextElementSibling.innerHTML = "Vous devez accepter les conditions d'utilisation";
-    isValid = false;
+    return false;
   } else {
     termsCheckbox.nextElementSibling.innerHTML = "";
+    return true;
   }
+}
 
-  // sauvegarde les données du formulaire
-  if (isValid) {
-
-    // Efface les données du formulaire
-    form.reset();
-    alert("Formulaire soumis avec succès !");
-  } else {
-    alert("Veuillez corriger les erreurs avant de soumettre le formulaire.");
-  }
+function hideModal() {
+  setTimeout(function () {
+    modalbg.style.display = "none";
+  }, 2000);
 }
