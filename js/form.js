@@ -35,10 +35,11 @@ function validateForm(e) {
   }
 
   function validateEmail(email) {
-    // Valide l'email avec regex
+    // Définit les règles de validation pour l'email via des expressions régulières.
     const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const additionalRules = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(?<!\.)$/;
-    // Valide l'email
+
+    // Vérifie la validité de l'adresse e-mail saisie
     if (!emailRegEx.test(email.value) || !additionalRules.test(email.value)) {
       email.nextElementSibling.innerHTML = "Invalid email";
       return false;
@@ -52,9 +53,50 @@ function validateForm(e) {
     isValid = false;
   }
 
+ // Valide la date de naissance
+
+const birthdate = document.getElementById("birthdate");
+if(!birthdate.value) {
+  birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
+  isValid = false;
+} else {
+    birthdate.nextElementSibling.innerHTML = "";
+}
+
+  // Valide le nombre de tournois
+  if (isNaN(number.value)) {
+    numberContest.nextElementSibling.innerHTML = "Please enter a number";
+    isValid = false;
+  } else {
+    number.nextElementSibling.innerHTML = "";
+  }
+
+  // Valide les boutons radios
+  let radioChecked = false;
+  radios.forEach((radio) => {
+    if (radio.checked) {
+      radioChecked = true;
+    }
+  });
+  if (!radioChecked) {
+    document.querySelector(".radio-error").innerHTML = "Please select an option";
+    isValid = false;
+  } else {
+    document.querySelector(".radio-error").innerHTML = "";
+  }
+
+
+  // valide la case à cocher
+  const termsCheckbox = document.getElementById("checkbox1");
+  if (!termsCheckbox.checked) {
+    termsCheckbox.nextElementSibling.innerHTML = "Vous devez accepter les conditions d'utilisation";
+    isValid = false;
+  } else {
+    termsCheckbox.nextElementSibling.innerHTML = "";
+  }
+
   // sauvegarde les données du formulaire
   if (isValid) {
-    // 
 
     // Efface les données du formulaire
     form.reset();
