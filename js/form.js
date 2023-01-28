@@ -2,12 +2,28 @@
 // Selectionne le formulaire
 const form = document.querySelector("form");
 
-// Selectionne les champs du formulaire
-const firstName = document.querySelector("#first");
-const lastName = document.querySelector("#last");
+// Ajout de l'écouteur d'événement 'blur' pour la validation de
+// Prénom
+const firstName = document.querySelector("#firstName");
+firstName.addEventListener("blur", validateFirstName);
+
+// Nom
+const lastName = document.querySelector("#lastName");
+lastName.addEventListener("blur", validateLastName);
+
+// Email
 const email = document.querySelector("#email");
+email.addEventListener("blur", validateEmail);
+
+// Date de naissance
 const birthdate = document.querySelector("#birthdate");
+birthdate.addEventListener("blur", validateBirthdate);
+
+// Nombre de tournois
 const number = document.querySelector("#number");
+tournaments.addEventListener("blur", validateTournaments);
+
+// Radios
 const radios = document.querySelectorAll("input[type=radio]");
 const checkbox = document.querySelector("#checkbox1");
 const submitBtn = document.querySelector("input[type=submit]");
