@@ -159,6 +159,10 @@ input {
   top: 19%;
 }
 
+#error-message {
+  display: none;
+}
+
 /* style pour les messages d'erreur */
 .error-message {
   margin-top: 5px;
