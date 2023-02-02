@@ -90,18 +90,20 @@ function validateNumber() {
   return isValid;
 }
 
-// Fonction qui valide les radios
+//  Ville radios
+const locationError = document.getElementById("location-error");
+
 function validateRadios() {
-  let isValid = false;
-  radios.forEach((radio) => {
-    if (radio.checked) {
-      isValid = true;
-    }
-  });
-  if (!isValid) {
-    document.getElementById("error-message").innerHTML = "Veuillez sélectionner une option";
+  const radios = document.querySelectorAll('input[name="location"]:checked');
+  if (radios.length === 0) {
+    locationError.innerHTML = "Veuillez sélectionner une option.";
+    locationError.style.display = "block";
+    return false;
+  } else {
+    locationError.innerHTML = "";
+    locationError.style.display = "none";
+    return true;
   }
-  return isValid;
 }
 
 function validateCheckbox() {
