@@ -53,14 +53,23 @@ function validateEmail() {
 }
 
 // Date de naissance
+const birthdateError = document.getElementById("birthdate-error");
 function validateBirthdate() {
-  if (!birthdate.value) {
-    birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
-    return false;
+  let isValid = false;
+  const today = new Date();
+
+  if (birthdate.value) {
+    const selectedDate = new Date(birthdate.value);
+    if (selectedDate <= today) {
+      birthdateError.innerHTML = "";
+      isValid = true;
+    } else {
+      birthdateError.innerHTML = "La date de naissance ne peut pas être dans le futur.";
+    }
   } else {
-    birthdate.nextElementSibling.innerHTML = "";
-    return true;
+    birthdateError.innerHTML = "La date de naissance est requise.";
   }
+  return isValid;
 }
 
 // Fonction qui valide le nombre de tournois
