@@ -103,24 +103,25 @@ function validateCheckbox() {
 // Ecoute l'envoi du formulaire
 form.addEventListener("submit", validate);
 
-// Fonction qui affiche le toast
-function toast(message) {
-  var toast = document.getElementById("toast");
-  toast.innerHTML = message;
-  toast.classList.add("show");
-  setTimeout(function(){
-    toast.classList.remove("show");
-  }, 6000);
-}
 
 
 // Fonction qui valide le formulaire
 function validate() {
-  if (validateFirstName() && validateLastName() && validateEmail() && validateBirthdate() && validateTournaments() && validateRadios() && validateCheckbox()) {
-    toast("Merci ! Votre réservation a été reçue.");
-    return true;
-  } else {
-    alert("Veuillez corriger les erreurs avant de soumettre le formulaire.");
-    return false;
+  let isValid = true;
+
+  // Valider les entrées du formulaire
+  if (!validateFirstName() || !validateLastName() || !validateEmail() || !validateBirthdate() || !validateNumber() || !validateRadios() || !validateTerms()) {
+    isValid = false;
   }
+  if (isValid) {
+    const toast = document.getElementById("toast");
+    toast.innerHTML = "Merci ! Votre réservation a été reçue.";
+    toast.style.display = "block";
+    setTimeout(function () {
+      toast.style.display = "none";
+    }, 6000);
+    modalbg.style.display = "none";
+  }
+
+  return isValid;
 }
