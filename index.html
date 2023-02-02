@@ -54,45 +54,42 @@
         je m'inscris
       </button>
     </div>
-
+    <div id="toast" class="toast">Formulaire soumis avec succès !</div>
     <div class="bground">
       <div class="content">
         <span class="close"></span>
         <div class="modal-body">
-          <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+          <form name="reserve" action="index.html" method="get" onsubmit="event.preventDefault(); validate();">
 
             <div class="formData">
               <label for="first">Prénom</label>
-              <input class="text-control" type="text" id="first" name="first" minlength="2" pattern=".{2,}"
-                required><br>
-              <p class="error-message"></p>
-              <p class="success-message"></p>
+              <input class="text-control" type="text" id="first" name="first" required><br>
+              <div class="error-message" id="first-error"></div>
             </div>
             <div class="formData">
               <label for="last">Nom</label><br>
-              <input class="text-control" type="text" id="last" name="last" minlength="2" pattern=".{2,}" required>
-              <br>
-              <p class="error-message"></p>
-              <p class="success-message"></p>
+              <input class="text-control" type="text" id="last" name="last" required><br>
+              <div class="error-message" id="last-error"></div>
             </div>
             <div class="formData">
               <label for="email">E-mail</label><br>
               <input class="text-control" type="email" id="email" name="email" required><br>
-              <p class="error-message"></p>
-              <p class="success-message"></p>
+              <div class="error-message" id="email-error"></div>
             </div>
             <div class="formData">
               <label for="birthdate">Date de naissance</label><br>
               <input class="text-control" type="date" id="birthdate" name="birthdate" required><br>
-              <p class="error-message"></p>
-              <p class="success-message"></p>
+              <div class="error-message" id="birthdate-error"></div>
             </div>
+
             <div class="formData">
               <label for="number">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-              <input type="number" class="text-control" id="number" name="number" min="0" max="99"><br>
+              <input type="text" class="text-control" id="number" name="number"><br>
+              <div class="error-message" id="number-error"></div>
             </div>
+
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
-            <p class="error-message"></p>
+            <div class="error-message" id="location-error"></div>
             <div class="formData">
               <input class="checkbox-input" type="radio" id="location1" name="location" value="New York">
               <label class="checkbox-label" for="location1">
@@ -121,14 +118,13 @@
             </div>
 
             <div class="formData">
-              <input class="checkbox-input" type="checkbox" id="checkbox1" checked required>
+              <input class="checkbox-input" type="checkbox" id="checkbox1" checked>
               <label class="checkbox2-label" for="checkbox1">
                 <span class="checkbox-icon"></span>
                 J'ai lu et accepté les conditions d'utilisation.
               </label>
               <br>
-              <p class="error-message"></p>
-              <p class="success-message"></p>
+              <div class="error-message" id="terms-error"></div>
               <input class="checkbox-input" type="checkbox" id="checkbox2">
               <label class="checkbox2-label" for="checkbox2">
                 <span class="checkbox-icon"></span>
@@ -138,9 +134,6 @@
             </div>
             <input class="btn-submit" type="submit" value="C'est parti">
           </form>
-          <!-- Affichage success-card -->
-          <!-- <div class="success-message"></div> -->
-          <div id="toast" class="toast">Formulaire soumis avec succès !</div>
         </div>
       </div>
     </div>
