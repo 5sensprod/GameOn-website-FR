@@ -72,17 +72,23 @@ function validateBirthdate() {
   return isValid;
 }
 
-// Fonction qui valide le nombre de tournois
-function validateTournaments() {
-  if (isNaN(number.value)) {
-    number.nextElementSibling.innerHTML = "Veuillez saisir un nombre";
-    return false;
+// Nombre de tournois
+const numberError = document.getElementById("number-error");
+function validateNumber() {
+  let isValid = false;
+  const numberValue = number.value;
+  if (numberValue.match(/^\d+$/)) {
+    if (numberValue >= 0 && numberValue <= 99) {
+      numberError.innerHTML = "";
+      isValid = true;
+    } else {
+      numberError.innerHTML = "La valeur doit être entre 0 et 99 inclus.";
+    }
   } else {
-    number.nextElementSibling.innerHTML = "";
-    return true;
+    numberError.innerHTML = "La valeur doit être un nombre.";
   }
+  return isValid;
 }
-
 
 // Fonction qui valide les radios
 function validateRadios() {
