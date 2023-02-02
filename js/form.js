@@ -101,7 +101,12 @@ function validateCheckbox() {
 }
 
 // Ecoute l'envoi du formulaire
-form.addEventListener("submit", validate);
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  if (validate()) {
+    form.reset();
+  }
+});
 
 
 
