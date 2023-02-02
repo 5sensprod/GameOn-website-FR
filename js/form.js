@@ -1,69 +1,58 @@
-
 // Selectionne le formulaire
 const form = document.querySelector("form");
 
-// Ajout de l'écouteur d'événement 'blur' pour la validation de
-// Prénom
-const firstName = document.querySelector("#firstName");
-firstName.addEventListener("blur", validateFirstName);
+// Selectionne les champs du formulaire
+const firstName = document.querySelector("#first");
+const lastName = document.querySelector("#last");
+const email = document.querySelector("#email");
+const birthdate = document.querySelector("#birthdate");
+const number = document.querySelector("#number");
+const submitBtn = document.querySelector("input[type=submit]");
 
-// Nom
-const lastName = document.querySelector("#lastName");
-lastName.addEventListener("blur", validateLastName);
+
+// Fonctions de validation et d'affichage des messages d'erreur
+
+// Prénoms
+const firstError = document.getElementById("first-error");
+function validateFirstName() {
+  let isValid = false;
+  if (firstName.value.length >= 2 && firstName.value !== "") {
+    firstError.innerHTML = "";
+    isValid = true;
+  } else {
+    firstError.innerHTML = "Minimum 2 caractères requis";
+  }
+  return isValid;
+}
+
+// Noms
+const lastError = document.getElementById("last-error");
+function validateLastName() {
+  let isValid = false;
+  if (lastName.value.length >= 2 && lastName.value !== "") {
+    lastError.innerHTML = "";
+    isValid = true;
+  } else {
+    lastError.innerHTML = "Minimum 2 caractères requis";
+  }
+  return isValid;
+}
 
 // Email
-const email = document.querySelector("#email");
-email.addEventListener("blur", validateEmail);
+const emailError = document.getElementById("email-error");
+function validateEmail() {
+  let isValid = false;
+  const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (emailRegEx.test(email.value)) {
+    emailError.innerHTML = "";
+    isValid = true;
+  } else {
+    emailError.innerHTML = "Email non valide";
+  }
+  return isValid;
+}
 
 // Date de naissance
-const birthdate = document.querySelector("#birthdate");
-birthdate.addEventListener("blur", validateBirthdate);
-
-// Nombre de tournois
-const number = document.querySelector("#number");
-tournaments.addEventListener("blur", validateTournaments);
-
-// Radios
-const radios = document.querySelectorAll("input[type=radio]");
-const checkbox = document.querySelector("#checkbox1");
-const submitBtn = document.querySelector("input[type=submit]");
-const successMessage = document.querySelector(".success-message");
-const errorMessage = document.querySelector(".checkbox-input");
-
-
-// Fonctions de validation des champs du formulaire
-function validateFirstName() {
-  if (firstName.value.length < 2 || firstName.value === "") {
-    firstName.nextElementSibling.innerHTML = "Minimum 2 caractères requis";
-    return false;
-  } else {
-    firstName.nextElementSibling.innerHTML = "";
-    return true;
-  }
-}
-
-
-function validateLastName() {
-  if (lastName.value.length < 2 || lastName.value === "") {
-    lastName.nextElementSibling.innerHTML = "Minimum 2 caractères requis";
-    return false;
-  } else {
-    lastName.nextElementSibling.innerHTML = "";
-    return true;
-  }
-}
-
-function validateEmail() {
-  const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(?:.[a-zA-Z]{2,})?$/;
-  if (!emailRegEx.test(email.value)) {
-    email.nextElementSibling.innerHTML = "Veuillez saisir une adresse e-mail valide";
-    return false;
-  } else {
-    email.nextElementSibling.innerHTML = "";
-    return true;
-  }
-}
-
 function validateBirthdate() {
   if (!birthdate.value) {
     birthdate.nextElementSibling.innerHTML = "Vous devez entrer votre date de naissance.";
@@ -85,6 +74,7 @@ function validateTournaments() {
   }
 }
 
+
 // Fonction qui valide les radios
 function validateRadios() {
   let isValid = false;
@@ -94,7 +84,7 @@ function validateRadios() {
     }
   });
   if (!isValid) {
-    errorMessage.nextElementSibling.innerHTML = "Veuillez sélectionner une option";
+    document.getElementById("error-message").innerHTML = "Veuillez sélectionner une option";
   }
   return isValid;
 }
