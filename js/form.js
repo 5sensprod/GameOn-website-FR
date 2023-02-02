@@ -106,13 +106,19 @@ function validateRadios() {
   }
 }
 
-function validateCheckbox() {
-  const termsCheckbox = document.getElementById("checkbox1");
+// Conditions d'utilisation
+function validateTerms() {
+  const termsCheckbox = document.querySelector("#checkbox1");
+  const termsError = document.getElementById("terms-error");
+
   if (!termsCheckbox.checked) {
-    termsCheckbox.nextElementSibling.innerHTML = "Vous devez accepter les conditions d'utilisation";
+    termsError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
+    termsError.style.display = "block";
     return false;
+
   } else {
-    termsCheckbox.nextElementSibling.innerHTML = "";
+    termsError.innerHTML = "";
+    termsError.style.display = "none";
     return true;
   }
 }
