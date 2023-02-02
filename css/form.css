@@ -159,8 +159,15 @@ input {
   top: 19%;
 }
 
-#error-message {
-  display: none;
+/* style pour les messages d'erreur */
+.error-message {
+  margin-top: 5px;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+color: #FF4E60;
+line-height: 142.6%;
 }
 
 /* Toast */
