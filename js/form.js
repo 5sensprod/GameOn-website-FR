@@ -18,9 +18,11 @@ function validateFirstName() {
   let isValid = false;
   if (firstName.value.length >= 2 && firstName.value !== "") {
     firstError.innerHTML = "";
+    firstName.classList.remove("error");
     isValid = true;
   } else {
-    firstError.innerHTML = "Minimum 2 caractères requis";
+    firstError.innerHTML = "Veuillez saisir au moins deux caractères";
+    firstName.classList.add("error");
   }
   return isValid;
 }
@@ -31,9 +33,11 @@ function validateLastName() {
   let isValid = false;
   if (lastName.value.length >= 2 && lastName.value !== "") {
     lastError.innerHTML = "";
+    lastName.classList.remove("error");
     isValid = true;
   } else {
-    lastError.innerHTML = "Minimum 2 caractères requis";
+    lastError.innerHTML = "Veuillez saisir au moins deux caractères";
+    lastName.classList.add("error");
   }
   return isValid;
 }
@@ -45,9 +49,11 @@ function validateEmail() {
   const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (emailRegEx.test(email.value)) {
     emailError.innerHTML = "";
+    email.classList.remove("error");
     isValid = true;
   } else {
-    emailError.innerHTML = "Email non valide";
+    emailError.innerHTML = "Veuillez saisir une adresse email valide.";
+    email.classList.add("error");
   }
   return isValid;
 }
@@ -62,12 +68,15 @@ function validateBirthdate() {
     const selectedDate = new Date(birthdate.value);
     if (selectedDate <= today) {
       birthdateError.innerHTML = "";
+      birthdate.classList.remove("error");
       isValid = true;
     } else {
-      birthdateError.innerHTML = "La date de naissance ne peut pas être dans le futur.";
+      birthdateError.innerHTML = "Votre date de naissance ne peut pas être dans le futur.";
+      birthdate.classList.add("error");
     }
   } else {
-    birthdateError.innerHTML = "La date de naissance est requise.";
+    birthdateError.innerHTML = "Votre date de naissance est requise.";
+    birthdate.classList.add("error");
   }
   return isValid;
 }
@@ -80,12 +89,15 @@ function validateNumber() {
   if (numberValue.match(/^\d+$/)) {
     if (numberValue >= 0 && numberValue <= 99) {
       numberError.innerHTML = "";
+      number.classList.remove("error");
       isValid = true;
     } else {
-      numberError.innerHTML = "La valeur doit être entre 0 et 99 inclus.";
+      numberError.innerHTML = "Le nombre doit être compris entre 0 et 99.";
+      number.classList.add("error");
     }
   } else {
     numberError.innerHTML = "La valeur doit être un nombre.";
+    number.classList.add("error");
   }
   return isValid;
 }
@@ -96,7 +108,7 @@ const locationError = document.getElementById("location-error");
 function validateRadios() {
   const radios = document.querySelectorAll('input[name="location"]:checked');
   if (radios.length === 0) {
-    locationError.innerHTML = "Veuillez sélectionner une option.";
+    locationError.innerHTML = "Veuillez sélectionner une ville.";
     locationError.style.display = "block";
     return false;
   } else {
@@ -107,10 +119,10 @@ function validateRadios() {
 }
 
 // Conditions d'utilisation
-function validateTerms() {
-  const termsCheckbox = document.querySelector("#checkbox1");
-  const termsError = document.getElementById("terms-error");
+const termsCheckbox = document.querySelector("#checkbox1");
+const termsError = document.getElementById("terms-error");
 
+function validateTerms() {
   if (!termsCheckbox.checked) {
     termsError.innerHTML = "Vous devez accepter les conditions d'utilisation.";
     termsError.style.display = "block";
