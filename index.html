@@ -55,13 +55,18 @@
         je m'inscris
       </button>
     </div>
-    <div id="toast" class="toast">Formulaire soumis avec succès !</div>
     <div class="bground">
+      <div id="toast" class="toast">
+        <span class="close-toast"></span>
+        <p>Merci pour votre inscription</p>
+        <button class="toast-btn">
+          Fermer
+        </button>
+      </div>
       <div class="content">
         <span class="close"></span>
         <div class="modal-body">
           <form name="reserve" action="index.html" method="get" onsubmit="event.preventDefault(); validate();">
-
             <div class="formData">
               <label for="first">Prénom</label>
               <input class="text-control" type="text" id="first" name="first" required><br>
@@ -82,13 +87,11 @@
               <input class="text-control" type="date" id="birthdate" name="birthdate" required><br>
               <div class="error-message" id="birthdate-error"></div>
             </div>
-
             <div class="formData">
               <label for="number">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
               <input type="text" class="text-control" id="number" name="number"><br>
               <div class="error-message" id="number-error"></div>
             </div>
-
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
             <div class="error-message" id="location-error"></div>
             <div class="formData">
@@ -117,7 +120,6 @@
                 <span class="checkbox-icon"></span>
                 Portland</label>
             </div>
-
             <div class="formData">
               <input class="checkbox-input" type="checkbox" id="checkbox1" checked>
               <label class="checkbox2-label" for="checkbox1">
