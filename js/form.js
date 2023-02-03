@@ -9,10 +9,13 @@ const birthdate = document.querySelector("#birthdate");
 const number = document.querySelector("#number");
 const submitBtn = document.querySelector("input[type=submit]");
 
-
 // Fonctions de validation et d'affichage des messages d'erreur
 
 // Prénoms
+firstName.addEventListener("input", function () {
+  validateFirstName();
+});
+
 const firstError = document.getElementById("first-error");
 function validateFirstName() {
   let isValid = false;
@@ -28,6 +31,10 @@ function validateFirstName() {
 }
 
 // Noms
+lastName.addEventListener("input", function () {
+  validateLastName();
+});
+
 const lastError = document.getElementById("last-error");
 function validateLastName() {
   let isValid = false;
@@ -43,6 +50,10 @@ function validateLastName() {
 }
 
 // Email
+email.addEventListener("input", function () {
+  validateEmail();
+});
+
 const emailError = document.getElementById("email-error");
 function validateEmail() {
   let isValid = false;
@@ -59,6 +70,11 @@ function validateEmail() {
 }
 
 // Date de naissance
+
+birthdate.addEventListener("input", function () {
+  validateBirthdate();
+});
+
 const birthdateError = document.getElementById("birthdate-error");
 function validateBirthdate() {
   let isValid = false;
@@ -82,6 +98,10 @@ function validateBirthdate() {
 }
 
 // Nombre de tournois
+number.addEventListener("input", function () {
+  validateNumber();
+});
+
 const numberError = document.getElementById("number-error");
 function validateNumber() {
   let isValid = false;
@@ -104,6 +124,13 @@ function validateNumber() {
 
 //  Ville radios
 const locationError = document.getElementById("location-error");
+const radioButtons = document.querySelectorAll('input[name="location"]');
+
+radioButtons.forEach(function (radioButton) {
+  radioButton.addEventListener("change", function () {
+    validateRadios();
+  });
+});
 
 function validateRadios() {
   const radios = document.querySelectorAll('input[name="location"]:checked');
@@ -121,6 +148,10 @@ function validateRadios() {
 // Conditions d'utilisation
 const termsCheckbox = document.querySelector("#checkbox1");
 const termsError = document.getElementById("terms-error");
+
+termsCheckbox.addEventListener("change", function () {
+  validateTerms();
+});
 
 function validateTerms() {
   if (!termsCheckbox.checked) {
@@ -143,8 +174,6 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-
-
 // Fonction qui valide le formulaire
 function validate() {
   let isValid = true;
@@ -155,13 +184,8 @@ function validate() {
   }
   if (isValid) {
     const toast = document.getElementById("toast");
-    toast.innerHTML = "Merci ! Votre réservation a été reçue.";
     toast.style.display = "block";
-    setTimeout(function () {
-      toast.style.display = "none";
-    }, 6000);
-    modalbg.style.display = "none";
+    modalContent.style.display = "none";
   }
-
   return isValid;
 }
