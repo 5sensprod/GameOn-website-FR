@@ -170,26 +170,59 @@ function validateTerms() {
   }
 }
 
-// Ecoute l'envoi du formulaire
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  if (validate()) {
-    form.reset();
-  }
-});
 
-// Fonction qui valide le formulaire
-function validate() {
+// Fonction Validation du formulaire qui permet de vérifier tous les champs en même temps	
+function validateForm() {
   let isValid = true;
-
-  // Valider les entrées du formulaire
-  if (!validateFieldName(firstName, firstError, 2) || !validateFieldName(lastName, lastError, 2) || !validateEmail() || !validateBirthdate() || !validateNumber() || !validateRadios() || !validateTerms()) {
+  
+  // Valider firstName
+  if (!validateFieldName(firstName, firstError, 2)) {
     isValid = false;
   }
+  
+  // Valider lastName
+  if (!validateFieldName(lastName, lastError, 2)) {
+    isValid = false;
+  }
+  
+  // Valider email
+  if (!validateEmail()) {
+    isValid = false;
+  }
+  
+  // Valider birthdate
+  if (!validateBirthdate()) {
+    isValid = false;
+  }
+  
+  // Valider number
+  if (!validateNumber()) {
+    isValid = false;
+  }
+  
+  // Valider radios
+  if (!validateRadios()) {
+    isValid = false;
+  }
+  
+  // Valider terms
+  if (!validateTerms()) {
+    isValid = false;
+  }
+  
   if (isValid) {
     const toast = document.getElementById("toast");
     toast.style.display = "block";
     modalContent.style.display = "none";
   }
+  
   return isValid;
 }
+// Ecoute l'envoi du formulaire
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  if (validateForm()) {
+    form.reset();
+  }
+});
