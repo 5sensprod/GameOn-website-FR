@@ -183,7 +183,7 @@ function validate() {
   let isValid = true;
 
   // Valider les entrées du formulaire
-  if (!validateFieldName(firstName, firstError, 2) || !validateEmail() || !validateBirthdate() || !validateNumber() || !validateRadios() || !validateTerms()) {
+  if (!validateFieldName(firstName, firstError, 2) || !validateFieldName(lastName, lastError, 2) || !validateEmail() || !validateBirthdate() || !validateNumber() || !validateRadios() || !validateTerms()) {
     isValid = false;
   }
   if (isValid) {
