@@ -9,7 +9,7 @@ const birthdate = document.querySelector("#birthdate");
 const number = document.querySelector("#number");
 const submitBtn = document.querySelector("input[type=submit]");
 
-// Fonctions de validation et d'affichage des messages d'erreur
+// Fonctions de validation et d'affichage des messages d'erreur pour chaque champ
 
 // Prénoms
 firstName.addEventListener("input", function () {
@@ -70,7 +70,6 @@ function validateEmail() {
 }
 
 // Date de naissance
-
 birthdate.addEventListener("input", function () {
   validateBirthdate();
 });
