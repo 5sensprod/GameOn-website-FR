@@ -47,7 +47,10 @@ const emailError = document.getElementById("email-error");
 function validateEmail() {
   let isValid = false;
   const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (emailRegEx.test(email.value)) {
+  if (email.value === "") {
+    emailError.innerHTML = "L'adresse email est obligatoire.";
+    email.classList.add("error");
+  } else if (emailRegEx.test(email.value)) {
     emailError.innerHTML = "";
     email.classList.remove("error");
     isValid = true;
@@ -87,7 +90,7 @@ function validateBirthdate() {
       birthdate.classList.add("error");
     }
   } else {
-    birthdateError.innerHTML = "La date de naissance est requise.";
+    birthdateError.innerHTML = "La date de naissance est obligatoire.";
     birthdate.classList.add("error");
   }
   return isValid;
@@ -117,7 +120,7 @@ function validateNumber() {
       number.classList.add("error");
     }
   } else {
-    numberError.innerHTML = "Le champ ne peut pas être vide.";
+    numberError.innerHTML = "Le champ est obligatoire.";
     number.classList.add("error");
   }
   return isValid;
