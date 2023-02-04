@@ -102,17 +102,22 @@ const numberError = document.getElementById("number-error");
 function validateNumber() {
   let isValid = false;
   const numberValue = number.value;
-  if (numberValue.match(/^\d+$/)) {
-    if (numberValue >= 0 && numberValue <= 99) {
-      numberError.innerHTML = "";
-      number.classList.remove("error");
-      isValid = true;
+  if (numberValue) {
+    if (numberValue.match(/^\d+$/)) {
+      if (numberValue >= 0 && numberValue <= 99) {
+        numberError.innerHTML = "";
+        number.classList.remove("error");
+        isValid = true;
+      } else {
+        numberError.innerHTML = "Le nombre doit être compris entre 0 et 99.";
+        number.classList.add("error");
+      }
     } else {
-      numberError.innerHTML = "Le nombre doit être compris entre 0 et 99.";
+      numberError.innerHTML = "Veuillez saisir uniquement un nombre.";
       number.classList.add("error");
     }
   } else {
-    numberError.innerHTML = "La valeur doit être un nombre.";
+    numberError.innerHTML = "Le champ ne peut pas être vide.";
     number.classList.add("error");
   }
   return isValid;
