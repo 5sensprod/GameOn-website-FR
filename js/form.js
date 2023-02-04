@@ -67,19 +67,27 @@ const birthdateError = document.getElementById("birthdate-error");
 function validateBirthdate() {
   let isValid = false;
   const today = new Date();
+  const minimumDate = new Date('1900-01-01');
+  const minimumAge = 12 * 365.25 * 24 * 60 * 60 * 1000; // 12 ans en millisecondes
 
   if (birthdate.value) {
     const selectedDate = new Date(birthdate.value);
-    if (selectedDate <= today) {
+    if (selectedDate <= today && selectedDate >= minimumDate && today - selectedDate >= minimumAge) {
       birthdateError.innerHTML = "";
       birthdate.classList.remove("error");
       isValid = true;
-    } else {
+    } else if (selectedDate > today) {
       birthdateError.innerHTML = "Votre date de naissance ne peut pas être dans le futur.";
+      birthdate.classList.add("error");
+    } else if (selectedDate < minimumDate) {
+      birthdateError.innerHTML = "La date de naissance ne peut pas être antérieure à 1900.";
+      birthdate.classList.add("error");
+    } else if (today - selectedDate < minimumAge) {
+      birthdateError.innerHTML = "Vous devez avoir au moins 12 ans.";
       birthdate.classList.add("error");
     }
   } else {
-    birthdateError.innerHTML = "Votre date de naissance est requise.";
+    birthdateError.innerHTML = "La date de naissance est requise.";
     birthdate.classList.add("error");
   }
   return isValid;
