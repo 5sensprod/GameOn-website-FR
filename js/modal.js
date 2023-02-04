@@ -1,34 +1,33 @@
-// DOM Elements
+// Éléments du DOM
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
-// variable modal content
+// Contenu de la variable modal
 const modalContent = document.querySelector(".content");
 
-// variable modal close button
+// Bouton X de fermeture de la variable modal
 const closeBtn = document.querySelector(".close");
 
-// variable toast close 
+// Variables pour les éléments fermeture du toast
 const closeToast = document.querySelector(".close-toast");
 const toastBtn = document.querySelector(".toast-btn");
 
-// launch modal event
+// Événement de lancement du modal
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+// Lancement du modal
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-
-// close modal event
+// Événement de fermeture du modal et du toast
 closeBtn.addEventListener("click", closeModal);
 modalbg.addEventListener("click", closeModal);
 closeToast.addEventListener("click", closeModal);
 toastBtn.addEventListener("click", closeModal);
 
-// close modal function
+// Fonction de fermeture du modal
 function closeModal(e) {
   if (e.target === closeBtn || e.target === modalbg || e.target === closeToast || e.target === toastBtn) {
     modalbg.style.display = "none";
