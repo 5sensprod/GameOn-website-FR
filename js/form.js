@@ -11,43 +11,32 @@ const submitBtn = document.querySelector("input[type=submit]");
 
 // Fonctions de validation et d'affichage des messages d'erreur pour chaque champ
 
-// Prénoms
-firstName.addEventListener("input", function () {
-  validateFirstName();
-});
-
-const firstError = document.getElementById("first-error");
-function validateFirstName() {
+//fonction générique de validation nom, prénom
+function validateFieldName(field, error, minLength) {
   let isValid = false;
-  if (firstName.value.length >= 2 && firstName.value !== "") {
-    firstError.innerHTML = "";
-    firstName.classList.remove("error");
+  const onlyLetters = /^[a-zA-Z]+$/;
+  if (field.value.length >= minLength && field.value !== "" && onlyLetters.test(field.value)) {
+    error.innerHTML = "";
+    field.classList.remove("error");
     isValid = true;
   } else {
-    firstError.innerHTML = "Veuillez saisir au moins deux caractères";
-    firstName.classList.add("error");
+    error.innerHTML = `Veuillez saisir au moins ${minLength} lettres.`;
+    field.classList.add("error");
   }
   return isValid;
 }
+
+// Prénoms
+firstName.addEventListener("input", function () {
+  validateFieldName(firstName, firstError, 2);
+});
+const firstError = document.getElementById("first-error");
 
 // Noms
 lastName.addEventListener("input", function () {
-  validateLastName();
+  validateFieldName(lastName, lastError, 2);
 });
-
 const lastError = document.getElementById("last-error");
-function validateLastName() {
-  let isValid = false;
-  if (lastName.value.length >= 2 && lastName.value !== "") {
-    lastError.innerHTML = "";
-    lastName.classList.remove("error");
-    isValid = true;
-  } else {
-    lastError.innerHTML = "Veuillez saisir au moins deux caractères";
-    lastName.classList.add("error");
-  }
-  return isValid;
-}
 
 // Email
 email.addEventListener("input", function () {
@@ -178,7 +167,7 @@ function validate() {
   let isValid = true;
 
   // Valider les entrées du formulaire
-  if (!validateFirstName() || !validateLastName() || !validateEmail() || !validateBirthdate() || !validateNumber() || !validateRadios() || !validateTerms()) {
+  if (!validateFieldName(firstName, firstError, 2) || !validateEmail() || !validateBirthdate() || !validateNumber() || !validateRadios() || !validateTerms()) {
     isValid = false;
   }
   if (isValid) {
