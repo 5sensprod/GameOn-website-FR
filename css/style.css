@@ -105,6 +105,13 @@ img {
   display: none;
 }
 
+@media screen and (max-width: 1000px) {
+  .hero-headline {
+    font-size: 4.5rem;
+  }
+}
+
+
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
